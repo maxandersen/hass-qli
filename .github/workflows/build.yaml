@@ -25,10 +25,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
             name: hassq-${{ matrix.os }}.jar
-            path: target/hassq-*
+            path: target/hassq-*-SNAPSHOT.jar
 
       - name: Upload binary
         uses: actions/upload-artifact@v2
         with:
           name: hassq-${{ matrix.os }}
-          path: target/hassq-*
+          path: target/hassq-*-SNAPSHOT
