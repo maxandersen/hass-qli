@@ -21,6 +21,12 @@ jobs:
         run: |
           mvn -Pnative clean package
       
+      - name: Upload jar
+        uses: actions/upload-artifact@v2
+        with:
+            name: hassq-${{ matrix.os }}.jar
+            path: target/hassq-*
+
       - name: Upload binary
         uses: actions/upload-artifact@v2
         with:
