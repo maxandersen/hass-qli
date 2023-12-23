@@ -1,0 +1,28 @@
+name: GraalVM Native Image builds
+on: [push, pull_request]
+jobs:
+  build:
+    name: hassq on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21'
+          distribution: 'graalvm-community'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          native-image-job-reports: 'true'
+
+      - name: Build 
+        run: |
+          mvn -Pnative clean package
+      
+      - name: Upload binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: hassq-${{ matrix.os }}
+          path: target/hassq-*

@@ -1,0 +1,438 @@
+[
+    {
+        "entity_id": "person.max_rydahl_andersen",
+        "state": "home",
+        "attributes": {
+            "editable": true,
+            "id": "max_rydahl_andersen",
+            "latitude": 55.28070068359375,
+            "longitude": 10.488953074248732,
+            "gps_accuracy": 8.87167134649133,
+            "source": "device_tracker.max_iphone",
+            "user_id": "594f0398af3c49098b54a78674d61041",
+            "device_trackers": [
+                "device_tracker.maxs_iphone",
+                "device_tracker.maxs_ipad",
+                "device_tracker.maxs_ipad_pro",
+                "device_tracker.ipad",
+                "device_tracker.max_iphone",
+                "device_tracker.lisbeths_macbook_air",
+                "device_tracker.darkbeard",
+                "device_tracker.manderse_mac_2",
+                "device_tracker.goldentiny"
+            ],
+            "entity_picture": "/api/image/serve/9b11c280e67c02fbd1e92bcd835f1bcf/512x512",
+            "friendly_name": "Max Rydahl Andersen"
+        },
+        "last_changed": "2023-12-19T15:41:33.450331+00:00",
+        "last_updated": "2023-12-19T20:57:35.768290+00:00",
+        "context": {
+            "id": "01HJ1XX98RZQ69Y1WD127XR137",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "person.lisbeth_rydahl_andersen",
+        "state": "home",
+        "attributes": {
+            "editable": true,
+            "id": "lisbeth_rydahl_andersen",
+            "latitude": 55.28060677310989,
+            "longitude": 10.489077818363917,
+            "gps_accuracy": 54.932018990082,
+            "source": "device_tracker.lisbeths_iphone",
+            "user_id": "e01b6d1bfd884d9096036653f318d4c3",
+            "device_trackers": [
+                "device_tracker.lisbeths_iphone"
+            ],
+            "entity_picture": "/api/image/serve/3e0c336e24fccd081c85be8e4325e5c6/512x512",
+            "friendly_name": "Lisbeth"
+        },
+        "last_changed": "2023-12-17T21:33:05.297620+00:00",
+        "last_updated": "2023-12-17T21:37:56.949167+00:00",
+        "context": {
+            "id": "01HHWVDQPNYY6SWKVTSGTX0GTD",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "person.anabelle",
+        "state": "unknown",
+        "attributes": {
+            "editable": true,
+            "id": "anabelle",
+            "device_trackers": [],
+            "entity_picture": "/api/image/serve/9f3fdf4b5b0244dc5ed5f01a1de6d3d9/512x512",
+            "friendly_name": "Anabelle"
+        },
+        "last_changed": "2023-12-17T21:33:05.297837+00:00",
+        "last_updated": "2023-12-17T21:37:56.949497+00:00",
+        "context": {
+            "id": "01HHWVDQPNE9GAZDT7JASMWRM7",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "person.benjamin",
+        "state": "karin",
+        "attributes": {
+            "editable": true,
+            "id": "benjamin",
+            "latitude": 55.28115463000002,
+            "longitude": 10.489582059999961,
+            "gps_accuracy": 165,
+            "source": "device_tracker.benjamins_ipad",
+            "user_id": "28a47be0252e4859a6193c138be677a3",
+            "device_trackers": [
+                "device_tracker.benjamins_ipad"
+            ],
+            "entity_picture": "/api/image/serve/34bb6604efa1291e14d1405efd7cca35/512x512",
+            "friendly_name": "Benjamin"
+        },
+        "last_changed": "2023-12-17T21:33:05.298025+00:00",
+        "last_updated": "2023-12-17T21:37:56.949860+00:00",
+        "context": {
+            "id": "01HHWVDQPNNWY893HB60EPY7MM",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "binary_sensor.remote_ui",
+        "state": "on",
+        "attributes": {
+            "device_class": "connectivity",
+            "friendly_name": "Remote UI"
+        },
+        "last_changed": "2023-12-17T21:33:15.208332+00:00",
+        "last_updated": "2023-12-17T21:33:15.208332+00:00",
+        "context": {
+            "id": "01HHWV54J8ESB8KXA0TR5NJ841",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.home_assistant_supervisor_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 1
+        },
+        "last_changed": "2023-12-17T21:38:10.957573+00:00",
+        "last_updated": "2023-12-17T21:38:11.654322+00:00",
+        "context": {
+            "id": "01HHWVE626D6SJN78WAK55TY1V",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.home_assistant_core_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 11
+        },
+        "last_changed": "2023-12-17T21:38:10.960819+00:00",
+        "last_updated": "2023-12-17T21:38:11.655432+00:00",
+        "context": {
+            "id": "01HHWVE627QMS0KJA715ME5GA2",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.adguard_home_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.962893+00:00",
+        "last_updated": "2023-12-17T21:38:11.656434+00:00",
+        "context": {
+            "id": "01HHWVE628P8TD2VBX2HYRY6ME",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.check_home_assistant_configuration_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.964648+00:00",
+        "last_updated": "2023-12-17T21:38:11.657285+00:00",
+        "context": {
+            "id": "01HHWVE6290ZDE1DH7KQXYCQ57",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.esphome_dev_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.966618+00:00",
+        "last_updated": "2023-12-17T21:38:11.658068+00:00",
+        "context": {
+            "id": "01HHWVE62A8P609M1HVYVETW93",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.file_editor_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.968289+00:00",
+        "last_updated": "2023-12-17T21:38:11.676666+00:00",
+        "context": {
+            "id": "01HHWVE62WKS5R1DJWAYH1XNHX",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.ssh_web_terminal_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.969870+00:00",
+        "last_updated": "2023-12-17T21:38:11.677925+00:00",
+        "context": {
+            "id": "01HHWVE62X1QN1CRT58J7K6Y83",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.samba_share_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.984335+00:00",
+        "last_updated": "2023-12-17T21:38:11.678980+00:00",
+        "context": {
+            "id": "01HHWVE62Y3Z7VP7ATYM0AATJC",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.visual_studio_code_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.985516+00:00",
+        "last_updated": "2023-12-17T21:38:11.680067+00:00",
+        "context": {
+            "id": "01HHWVE6301E0VZVVQCPWPXTBP",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.grafana_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.986540+00:00",
+        "last_updated": "2023-12-17T21:38:11.681238+00:00",
+        "context": {
+            "id": "01HHWVE631NKNZSC5QXSNRMZN9",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.influxdb_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.987550+00:00",
+        "last_updated": "2023-12-17T21:38:11.733720+00:00",
+        "context": {
+            "id": "01HHWVE64NAQJCTKE241BW6HJ0",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.mariadb_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.988439+00:00",
+        "last_updated": "2023-12-17T21:38:11.734471+00:00",
+        "context": {
+            "id": "01HHWVE64PYZFRHR1HAREH9YRG",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.terminal_ssh_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.993125+00:00",
+        "last_updated": "2023-12-17T21:38:11.735068+00:00",
+        "context": {
+            "id": "01HHWVE64Q6K1VTRW2VQQWE3ET",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.hassos_ssh_port_22222_configurator_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.994214+00:00",
+        "last_updated": "2023-12-17T21:38:11.735615+00:00",
+        "context": {
+            "id": "01HHWVE64Q76EG4CMYZQ26Y6JY",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.mosquitto_broker_update",
+        "state": "unavailable",
+        "attributes": {
+            "resto   red": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.995036+00:00",
+        "last_updated": "2023-12-17T21:38:11.736163+00:00",
+        "context": {
+            "id": "01HHWVE64RGC9PJ3GAZKRSA5VY",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.zigbee2mqtt_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.995811+00:00",
+        "last_updated": "2023-12-17T21:38:11.736794+00:00",
+        "context": {
+            "id": "01HHWVE64RTQ3R5HCHNFVE7FMY",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.victoria_metrics_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 25
+        },
+        "last_changed": "2023-12-17T21:38:10.996569+00:00",
+        "last_updated": "2023-12-17T21:38:11.737387+00:00",
+        "context": {
+            "id": "01HHWVE64SSQ28G868QG3VP8YJ",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "update.home_assistant_operating_system_update",
+        "state": "unavailable",
+        "attributes": {
+            "restored": true,
+            "friendly_name": "Update",
+            "supported_features": 3
+        },
+        "last_changed": "2023-12-17T21:38:11.010963+00:00",
+        "last_updated": "2023-12-17T21:38:11.737973+00:00",
+        "context": {
+            "id": "01HHWVE64SJEBMESBP62QP156T",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "binary_sensor.always_on",
+        "state": "on",
+        "attributes": {
+            "friendly_name": "Always On"
+        },
+        "last_changed": "2023-12-17T21:37:56.910751+00:00",
+        "last_updated": "2023-12-17T21:37:56.910751+00:00",
+        "context": {
+            "id": "01HHWVDQNE3K3ZFPMYQYR54A1H",
+            "parent_id": null,
+            "user_id": null
+        }
+    },
+    {
+        "entity_id": "sensor.pollen_kobenhavn_birk",
+        "state": "0",
+        "attributes": {
+            "last_update": "2023-10-19T15:41:18",
+            "attribution": "Dagens pollental og pollenvarsling er fra Astma-Allergi Danmark og Danmarks Meteorologiske Institut.  ",
+            "unit_of_measurement": "ppcm",
+            "icon": "mdi:leaf",
+            "friendly_name": "Birk"
+        },
+        "last_changed": "2023-12-17T21:33:11.863214+00:00",
+        "last_updated": "2023-12-17T21:33:11.863214+00:00",
+        "context": {
+            "id": "01HHWV519QQETRSJW1FN47845V",
+            "parent_id": null,
+            "user_id": null
+        }
+    }
+]
