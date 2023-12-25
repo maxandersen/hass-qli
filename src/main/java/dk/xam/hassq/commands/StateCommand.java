@@ -1,14 +1,21 @@
 package dk.xam.hassq.commands;
 
+import static dk.xam.hassq.Util.column;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import de.vandermeer.asciitable.AsciiTable;
-import de.vandermeer.asciitable.CWC_LongestWordMax;
+import com.github.freva.asciitable.AsciiTable;
+import com.github.freva.asciitable.Column;
+import com.github.freva.asciitable.HorizontalAlign;
+
 import dk.xam.hassq.HomeAssistant;
+import dk.xam.hassq.Util;
+import dk.xam.hassq.model.Entity;
 import io.quarkus.logging.Log;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -33,24 +40,21 @@ public class StateCommand {
 
        Log.info("States matching " + p.pattern());
 
-       final var at = new AsciiTable();
-       at.addRule();
-       at.addRow("Entity", "State");
-       at.addRule();
-        // print states matching the p regex
-        states.stream()
-            .filter(s -> p.matcher(s.id()).find())
-            .filter(s -> sf.matcher(s.state()).find())
-            .forEach(s -> at.addRow(s.id(), s.state()));
+       states = states.stream().filter(e -> p.matcher(e.id()).find() && sf.matcher(e.state()).find()).toList();
 
-        at.addRule();
-        at.getRenderer().setCWC(new CWC_LongestWordMax(new int[]{-1,-1}));
-		System.out.println(at.render());
+       render(states);
+
     }
 
+    void render(List<Entity> data) {
+        Util.table().data(data,
+                    List.of(column("ID").with(e -> e.id()),
+                            column("STATE").maxWidth(20).with(e -> e.state())));
+    };
+    
     @Command(name = "get")
     public void list(String entityId) {
        var s = ha.getState(entityId);
-       System.out.println(String.format("%s=%s", s.id(), s.state()));
+       render(List.of(s));
     }
 }

@@ -1,11 +1,8 @@
 package dk.xam.hassq;
 
-import org.eclipse.microprofile.rest.client.inject.RestClient;
-
 import dk.xam.hassq.commands.AreaCommand;
+import dk.xam.hassq.commands.ConfigCommand;
 import dk.xam.hassq.commands.StateCommand;
-import io.quarkus.logging.Log;
-import io.quarkus.picocli.runtime.annotations.TopCommand;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
@@ -14,8 +11,13 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 @QuarkusMain
-@Command(name = "hassq", mixinStandardHelpOptions = true, subcommands = { StateCommand.class, AreaCommand.class })
+@Command(name = "hassq", mixinStandardHelpOptions = true, subcommands = { StateCommand.class, AreaCommand.class, ConfigCommand.class})
 public class hassq implements Runnable, QuarkusApplication {
+
+  @Inject
+  HomeAssistantWS hass;
+
+  
 
     @Override
     public void run() {

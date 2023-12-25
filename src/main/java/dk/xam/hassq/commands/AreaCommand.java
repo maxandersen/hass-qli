@@ -1,8 +1,10 @@
 package dk.xam.hassq.commands;
 
+import static dk.xam.hassq.Util.column;
 import static dk.xam.hassq.Util.stringToFilter;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
@@ -11,9 +13,12 @@ import java.util.regex.Pattern;
 import org.eclipse.microprofile.config.ConfigProvider;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.freva.asciitable.AsciiTable;
+import com.github.freva.asciitable.Column;
 
-import de.vandermeer.asciitable.AsciiTable;
 import dk.xam.hassq.HomeAssistantWS;
+import dk.xam.hassq.Util;
+import dk.xam.hassq.model.Area;
 import jakarta.inject.Inject;
 import jakarta.websocket.DeploymentException;
 import picocli.CommandLine.Command;
@@ -36,18 +41,17 @@ public class AreaCommand {
 
        Pattern p = stringToFilter(areaFilter);
 
-       final var at = new AsciiTable();
-       at.addRule();
-       at.addRow("id", "name");
-       at.addRule();
-        // print states matching the p regex
-        areas.stream()
-            .filter(s -> p.matcher(s.name()).find())
-            .forEach(s -> at.addRow(s.id(), s.name()));
+       
+       render(areas.stream()
+            .filter(s -> p.matcher(s.name()).find()).toList());
 
-        at.addRule();
-        //at.getRenderer().setCWC(new CWC_LongestWordMax(new int[]{400,400}));
-		System.out.println(at.render());
-     
+    }
+
+    void render(List<Area> data) {
+        var result = Util.table().data(data,
+                    List.of(column("ID").with(e -> e.id()),
+                            column("NAME").with(e -> e.name())));
+
+        System.out.println(result);
     }
 }

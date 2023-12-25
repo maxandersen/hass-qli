@@ -82,9 +82,9 @@ public class HomeAssistantWS {
                     if (result != null) {
                         state = HomeAssistantWS.State.DONE;
                         return (T) result;
-                    } else {
+                    } /*else {
                         throw new IllegalStateException("Unexpected message: " + last);
-                    }
+                    }*/
                 }
             }
         } catch (DeploymentException | IOException | InterruptedException | ExecutionException
@@ -163,5 +163,9 @@ public class HomeAssistantWS {
     public List<Area> getAreas() {
         return query(Map.of("type", "config/area_registry/list"),
                 mapper.getTypeFactory().constructCollectionType(List.class, Area.class));
+    }
+
+    public String getConfig() {
+        return query(Map.of("type", "system_health/info"), mapper.getTypeFactory().constructType(String.class));
     }
 }
