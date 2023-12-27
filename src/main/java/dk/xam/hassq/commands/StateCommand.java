@@ -9,10 +9,6 @@ import java.util.regex.Pattern;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import com.github.freva.asciitable.AsciiTable;
-import com.github.freva.asciitable.Column;
-import com.github.freva.asciitable.HorizontalAlign;
-
 import dk.xam.hassq.HomeAssistant;
 import dk.xam.hassq.Util;
 import dk.xam.hassq.model.Entity;
@@ -22,7 +18,7 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 @Command(name = "state")
-public class StateCommand {
+public class StateCommand extends BaseCommand {
 
     /** Home Assistant server url */
     @ConfigProperty(name="hass-server", defaultValue="http://localhost:8123")
@@ -47,9 +43,9 @@ public class StateCommand {
     }
 
     void render(List<Entity> data) {
-        Util.table().data(data,
+        System.out.println(Util.table().data(data,
                     List.of(column("ID").with(e -> e.id()),
-                            column("STATE").maxWidth(20).with(e -> e.state())));
+                            column("STATE").maxWidth(20).with(e -> e.state()))));
     };
     
     @Command(name = "get")

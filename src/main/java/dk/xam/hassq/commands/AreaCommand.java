@@ -10,11 +10,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 import java.util.regex.Pattern;
 
-import org.eclipse.microprofile.config.ConfigProvider;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.freva.asciitable.AsciiTable;
-import com.github.freva.asciitable.Column;
 
 import dk.xam.hassq.HomeAssistantWS;
 import dk.xam.hassq.Util;
@@ -25,13 +21,55 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
 @Command(name = "area")
-public class AreaCommand {
+public class AreaCommand extends BaseCommand {
 
     @Inject
     HomeAssistantWS hass;
 
     @Inject
     ObjectMapper mapper;
+
+    @Command
+    void create(@Parameters(description="one or more area names to create") List<String> names) {
+
+        
+        names.forEach(n -> {
+            hass.createArea(n);
+            System.out.println("Created area: " + n);
+        });
+    }
+
+    @Command
+    void delete(@Parameters(description="one or more area names to delete") List<String> idOrNames) {
+
+        var areas = hass.getAreas();
+        
+        idOrNames.forEach(nid -> {
+            Area area = areas.stream().filter(a -> a.id().equals(nid) || a.name().equals(nid)).findFirst().orElse(null);
+            if(area==null) {
+                System.out.println("Area not found: " + nid);
+            } else {
+                hass.deleteArea(area.id());
+               System.out.println("Deleted area: " + area.id());
+            }
+        });
+    }
+
+    @Command
+    void rename(@Parameters(description="Old area name") String oldName, @Parameters(description="New area name") String newName) {
+
+        var areas = hass.getAreas();
+        
+            Area area = areas.stream().filter(a -> a.id().equals(oldName) || a.name().equals(oldName)).findFirst().orElse(null);
+            if(area==null) {
+                System.out.println("Area not found: " + oldName);
+            } else {
+                hass.renameArea(area.id(), newName);
+               System.out.println("Renamed area: " + area.id());
+            }
+        }
+    
+
 
     @Command
     void list(@Parameters(arity="0..1") Optional<String> areaFilter) throws IOException, DeploymentException, InterruptedException, ExecutionException, TimeoutException {
@@ -44,6 +82,10 @@ public class AreaCommand {
        
        render(areas.stream()
             .filter(s -> p.matcher(s.name()).find()).toList());
+
+    }
+
+    void findAreas(String filter) {
 
     }
 

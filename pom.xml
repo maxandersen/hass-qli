@@ -65,6 +65,12 @@
   <artifactId>ascii-table</artifactId>
   <version>1.8.0</version>
 </dependency>
+<dependency>
+  <groupId>org.assertj</groupId>
+  <artifactId>assertj-core</artifactId>
+  <version>3.24.2</version>
+  <scope>test</scope>
+</dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-rest-client-reactive-jackson</artifactId>

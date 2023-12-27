@@ -13,7 +13,7 @@ public class CLIConfigSource implements ConfigSource {
         configuration.put("hass-server", "http://homeassistant.local:8123");
     }
 
-    static void put(String key, String value) {
+    public static void put(String key, String value) {
         configuration.put(key, value);
     }
 

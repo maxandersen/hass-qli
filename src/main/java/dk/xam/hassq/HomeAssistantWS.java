@@ -30,6 +30,18 @@ import jakarta.websocket.Session;
 @ClientEndpoint
 public class HomeAssistantWS {
 
+public static final String WS_TYPE_DEVICE_REGISTRY_LIST = "config/device_registry/list";
+public static final String WS_TYPE_AREA_REGISTRY_LIST = "config/area_registry/list";
+public static final String WS_TYPE_AREA_REGISTRY_CREATE = "config/area_registry/create";
+public static final String WS_TYPE_AREA_REGISTRY_DELETE = "config/area_registry/delete";
+public static final String WS_TYPE_AREA_REGISTRY_UPDATE = "config/area_registry/update";
+public static final String WS_TYPE_DEVICE_REGISTRY_UPDATE = "config/device_registry/update";
+public static final String WS_TYPE_ENTITY_REGISTRY_LIST = "config/entity_registry/list";
+public static final String WS_TYPE_ENTITY_REGISTRY_GET = "config/entity_registry/get";
+public static final String WS_TYPE_ENTITY_REGISTRY_UPDATE = "config/entity_registry/update";
+public static final String WS_TYPE_ENTITY_REGISTRY_REGISTRY = "config/entity_registry/remove";
+
+
     private CompletableFuture<String> messageFuture;
 
     State state;
@@ -139,7 +151,9 @@ public class HomeAssistantWS {
                 break;
             case READY:
                 if (Boolean.FALSE.equals(map.get("success").asBoolean())) {
-                    throw new IllegalStateException("Error " + msg);
+                    String code = map.get("error").get("code").asText();
+                    String message = map.get("error").get("message").asText();
+                    throw new IllegalStateException(code + ": " + message);
                 } else if ("result".equals(type)) {
                     state = State.DONE;
                     Log.debug("converting " + map.get("result") + " to " + resultType);
@@ -167,5 +181,17 @@ public class HomeAssistantWS {
 
     public String getConfig() {
         return query(Map.of("type", "system_health/info"), mapper.getTypeFactory().constructType(String.class));
+    }
+
+    public Area createArea(String name) {
+        return query(Map.of("type", WS_TYPE_AREA_REGISTRY_CREATE, "name", name), mapper.getTypeFactory().constructType(Area.class));
+    }
+
+    public Area deleteArea(String id) {
+        return query(Map.of("type", WS_TYPE_AREA_REGISTRY_DELETE, "area_id", id), mapper.getTypeFactory().constructType(Area.class));
+    }
+
+    public Area renameArea(String id, String newName) {
+        return query(Map.of("type", WS_TYPE_AREA_REGISTRY_UPDATE, "area_id", id, "name", newName), mapper.getTypeFactory().constructType(Area.class));
     }
 }
