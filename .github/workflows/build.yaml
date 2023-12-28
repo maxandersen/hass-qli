@@ -37,5 +37,5 @@ jobs:
       - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
-          name: hassq-${{ matrix.os }}
-          path: target/hassq-*-SNAPSHOT
+          name: ${{ matrix.os == 'windows-latest' && 'hassq-<someversion>-SNAPSHOT.exe' || 'hassq-<someversion>-SNAPSHOT' }}
+          path: target/${{ matrix.os == 'windows-latest' && 'hassq-*-SNAPSHOT.exe' || 'hassq-*-SNAPSHOT' }}
