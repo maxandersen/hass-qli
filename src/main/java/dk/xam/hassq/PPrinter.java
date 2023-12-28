@@ -3,6 +3,7 @@ package dk.xam.hassq;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -17,6 +18,8 @@ public class PPrinter {
     
     public PPrinter(ObjectMapper mapper) {
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        //uncomment to be strict  
+        //mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
 
         this.mapper = mapper;
 

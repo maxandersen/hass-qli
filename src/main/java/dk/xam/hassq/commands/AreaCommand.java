@@ -89,11 +89,20 @@ public class AreaCommand extends BaseCommand {
 
     }
 
-    void render(List<Area> data) {
-        var result = Util.table().data(data,
-                    List.of(column("ID").with(e -> e.id()),
-                            column("NAME").with(e -> e.name())));
+    @Inject
+    dk.xam.hassq.PPrinter pretty;
 
-        System.out.println(result);
+    void render(List<Area> data) {
+
+        if(parent.json()) {
+            System.out.println(pretty.string(data));
+            return;
+        } else {
+            var result = Util.table().data(data,
+                        List.of(column("ID").with(e -> e.id()),
+                                column("NAME").with(e -> e.name())));
+
+            System.out.println(result);
+        }
     }
 }

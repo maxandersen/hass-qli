@@ -124,6 +124,7 @@ public static final String WS_TYPE_ENTITY_REGISTRY_REGISTRY = "config/entity_reg
     }
 
     <T> T handleMessage(String msg, Session session, JavaType resultType) throws JsonProcessingException {
+        Log.debug("Handling message: " + msg);
         resetFuture();
         var map = mapper.readTree(msg);
         String type = map.get("type").asText();

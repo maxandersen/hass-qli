@@ -34,8 +34,9 @@ public class ConfigCommand extends BaseCommand {
 
        var data = List.of(hass.getConfig());
        
+       if(parent.json()) {
        System.out.println(pretty.string(data));
-
+       } else {
        var result = Util.table()
                     .data(data,
                     List.of(column("VERSION").with(e -> e.version()),
@@ -48,6 +49,7 @@ public class ConfigCommand extends BaseCommand {
         ));
 
         System.out.println(result);
+       }
 
     }
 

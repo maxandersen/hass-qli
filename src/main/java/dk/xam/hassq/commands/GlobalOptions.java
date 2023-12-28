@@ -1,10 +1,10 @@
 package dk.xam.hassq.commands;
 
+import static picocli.CommandLine.Spec.Target.MIXEE;
+
 import picocli.CommandLine.Model.CommandSpec;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Spec;
-
-import static picocli.CommandLine.Spec.Target.MIXEE;
 
 /**
  * This class is just used to tell hassql commands they have some global options that can be used
@@ -15,6 +15,16 @@ import static picocli.CommandLine.Spec.Target.MIXEE;
 public class GlobalOptions {
     private @Spec(MIXEE) CommandSpec mixee; // spec of the command where the @Mixin is used
 
+    private static GlobalOptions getTopLevelCommandLoggingMixin(CommandSpec commandSpec) {
+        return ((hassq) commandSpec.root().userObject()).globalOptions;
+    }
+
+    /** Ensures command methods also have globla options */
+    /*public static int executionStrategy(ParseResult parseResult) {
+        getTopLevelCommandLoggingMixin(parseResult.commandSpec()).configureLoggers();
+        return new CommandLine.RunLast().execute(parseResult);
+    }*/
+    
     /**
      * Sets the specified verbosity on the LoggingMixin of the top-level command.
      * @param verbosity the new verbosity value
@@ -38,4 +48,5 @@ public class GlobalOptions {
     // but if we wanted to we could do something like this
     // ((MyApp) mixee.root().userObject()).loggingMixin.verbosity = verbosity;
     }
+    
 }
