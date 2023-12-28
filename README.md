@@ -32,3 +32,5 @@ based on using Quarkus.
 Thus this is not trying to displace hass-cli but rather be a new alternative. 
 
 Not sure where it will go but at least I have a working cli for my own use now and I have a way to test Quarkus developer experience.
+
+The advantages of using Java is that its dependencies are much easier to manage and does not conflict with other Python dependencies. Meaning that even 5 years from now this code shuold be able to run without any issues - assuming HomeAssistant API is still the same. 
