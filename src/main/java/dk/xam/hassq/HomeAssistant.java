@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import dk.xam.hassq.model.Config;
 import dk.xam.hassq.model.DomainInfo;
-import dk.xam.hassq.model.Entity;
+import dk.xam.hassq.model.EntityState;
 import dk.xam.hassq.model.EventInfo;
 import io.quarkus.rest.client.reactive.ClientExceptionMapper;
 import jakarta.ws.rs.Consumes;
@@ -36,9 +36,9 @@ public interface HomeAssistant {
 
     @GET @Path("services") List<DomainInfo> getServices();
 
-    @GET @Path("states") List<Entity> getStates();
+    @GET @Path("states") List<EntityState> getStates();
 
-    @GET @Path("states/{entity}") Entity getState(String entity);
+    @GET @Path("states/{entity}") EntityState getState(String entity);
 
     @GET @Path("error_log") String getErrorLog();
 

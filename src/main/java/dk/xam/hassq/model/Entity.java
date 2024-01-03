@@ -1,47 +1,23 @@
 package dk.xam.hassq.model;
-
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record Entity(
-    @JsonProperty("entity_id") String id,
-    @JsonProperty("state") String state,
-    @JsonProperty("attributes") Attributes attributes,
-    @JsonProperty("last_changed") String lastChanged,
-    @JsonProperty("last_updated") String lastUpdated,
-    @JsonProperty("context") Context context) {
-
-    public static record Attributes(
-        @JsonProperty("editable") Boolean editable,
-        @JsonProperty("id") String id,
-        @JsonProperty("latitude") Double latitude,
-        @JsonProperty("longitude") Double longitude,
-        @JsonProperty("gps_accuracy") Double gpsAccuracy,
-        @JsonProperty("source") String source,
-        @JsonProperty("user_id") String userId,
-        @JsonProperty("device_trackers") List<String> deviceTrackers,
-        @JsonProperty("entity_picture") String entityPicture,
-        @JsonProperty("friendly_name") String friendlyName,
-        Map<String, Object> unknown) {
-
-            public Attributes {
-                unknown = new HashMap<>();
-            }
-
-            @JsonAnySetter
-            public void setUnknown(String name, Object value) {
-                unknown.put(name, value);
-            }
-    }
-
-    public static record Context(
-        @JsonProperty("id") String id,
-        @JsonProperty("parent_id") String parentId,
-        @JsonProperty("user_id") String userId) {
-    }
-}
-
+    @JsonProperty("area_id") String areaId,
+    @JsonProperty("config_entry_id") String configEntryId,
+    @JsonProperty("device_id") String deviceId,
+    @JsonProperty("disabled_by") String disabledBy,
+    @JsonProperty("entity_category") String entityCategory,
+    @JsonProperty("entity_id") String entityId,
+    @JsonProperty("has_entity_name") Boolean hasEntityName,
+    @JsonProperty("hidden_by") String hiddenBy,
+    @JsonProperty("icon") String icon,
+    @JsonProperty("id") String id,
+    @JsonProperty("name") String name,
+    @JsonProperty("options") Map<String, Map<String, String>> options,
+    @JsonProperty("original_name") String originalName,
+    @JsonProperty("platform") String platform,
+    @JsonProperty("translation_key") String translationKey,
+    @JsonProperty("unique_id") String uniqueId
+) {}

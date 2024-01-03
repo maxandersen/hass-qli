@@ -1,5 +1,7 @@
 package dk.xam.hassq.commands;
 
+import java.io.PrintWriter;
+
 import dk.xam.hassq.CLIConfigSource;
 import dk.xam.hassq.HomeAssistantWS;
 import io.quarkus.runtime.Quarkus;
@@ -10,10 +12,9 @@ import jakarta.inject.Inject;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.ParseResult;
-
-import java.io.PrintWriter;
 @QuarkusMain
-@Command(name = "hassq", mixinStandardHelpOptions = true, subcommands = { StateCommand.class, AreaCommand.class, ConfigCommand.class})
+@Command(name = "hassq", mixinStandardHelpOptions = true, 
+          subcommands = { StateCommand.class, AreaCommand.class, EntityCommand.class, EventCommand.class, ConfigCommand.class})
 public class hassq extends BaseCommand implements Runnable, QuarkusApplication {
 
   @picocli.CommandLine.Option(names = {"--json"}, description = {"Output as json"}, scope = picocli.CommandLine.ScopeType.INHERIT)
@@ -64,6 +65,9 @@ public class hassq extends BaseCommand implements Runnable, QuarkusApplication {
           printWriter.println("No exception provided");
           return;
       }
+
+      throwable.printStackTrace(printWriter);
+      
   
       StringBuilder indent = new StringBuilder();
   
@@ -90,8 +94,18 @@ public class hassq extends BaseCommand implements Runnable, QuarkusApplication {
             if (arg.startsWith("--")) {
                 String[] parts = arg.substring(2).split("=");
                 if (parts.length == 2) {
-                    //System.out.println("Setting " + parts[0] + " to " + parts[1]);
-                    CLIConfigSource.put(parts[0], parts[1]);
+                 // System.out.println("Setting " + parts[0] + " to " + parts[1]);
+                  CLIConfigSource.put(parts[0], parts[1]);
+                }
+
+                if(parts[0].equals("debug")) {
+                  //TODO: these values does not seem to have any effect 
+                 // System.out.println("Setting debug options");
+                  //CLIConfigSource.put("quarkus.log.level", "DEBUG");
+                  CLIConfigSource.put("quarkus.rest-client.logging.scope", "request-response");
+                  CLIConfigSource.put("quarkus.rest-client.logging.body-limit", "10000");
+                  CLIConfigSource.put("quarkus.log.category.\"org.jboss.resteasy.reactive.client.logging\"", "DEBUG");
+                  CLIConfigSource.put("quarkus.log.category.\"dk.xam.hassq\"", "DEBUG");
                 }
             }
         }

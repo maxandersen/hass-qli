@@ -3,12 +3,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>dk.xam.hassq</groupId>
-  <artifactId>hassq</artifactId>
+  <artifactId>hass-qli</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <name>hassq</name>
-  <description>app -- Sample Quarkus CLI application</description>
-  <inceptionYear>2021</inceptionYear>
-  <url>https://github.com/maxandersen/hassq</url>
+  <name>hass-cli</name>
+  <description>hass-cli -- CLI for Home Assistant</description>
+  <inceptionYear>2023</inceptionYear>
+  <url>https://github.com/maxandersen/hass-qli</url>
   <developers>
     <developer>
       <id>maxandersen</id>
@@ -27,7 +27,7 @@
     <distribution.directory>${project.build.directory}/distributions</distribution.directory>
 
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
-    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>

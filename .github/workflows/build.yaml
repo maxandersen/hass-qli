@@ -2,7 +2,7 @@ name: GraalVM Native Image builds
 on: [push, pull_request]
 jobs:
   build:
-    name: hassq on ${{ matrix.os }}
+    name: hass-qli on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -31,11 +31,11 @@ jobs:
       - name: Upload jar
         uses: actions/upload-artifact@v4
         with:
-            name: hassq-${{ matrix.os }}.jar
-            path: target/hassq-*-SNAPSHOT.jar
+            name: hass-qli-${{ matrix.os }}.jar
+            path: target/hass-qli-*-SNAPSHOT.jar
 
       - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.os == 'windows-latest' && 'hassq-<someversion>-SNAPSHOT.exe' || 'hassq-<someversion>-SNAPSHOT' }}
-          path: target/${{ matrix.os == 'windows-latest' && 'hassq-*-SNAPSHOT.exe' || 'hassq-*-SNAPSHOT' }}
+          name: ${{ matrix.os == 'windows-latest' && 'hass-qli-${{matrix.os}}.exe' || 'hass-qli-${{matrix.os}}' }}
+          path: target/${{ matrix.os == 'windows-latest' && 'hass-qli-*-SNAPSHOT.exe' || 'hass-qli-*-SNAPSHOT' }}

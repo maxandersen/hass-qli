@@ -6,10 +6,10 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dk.xam.hassq.HomeAssistant;
 import dk.xam.hassq.PPrinter;
 import dk.xam.hassq.Util;
-import dk.xam.hassq.model.Entity;
+import dk.xam.hassq.model.EntityState;
 import io.quarkus.logging.Log;
 import jakarta.inject.Inject;
 import picocli.CommandLine.Command;
@@ -26,10 +26,6 @@ import picocli.CommandLine.Parameters;
 
 @Command(name = "state")
 public class StateCommand extends BaseCommand {
-
-    /** Home Assistant server url */
-    @ConfigProperty(name="hass-server", defaultValue="http://localhost:8123")
-    String hass_server;
 
     @Inject PPrinter pretty;
     
@@ -51,18 +47,53 @@ public class StateCommand extends BaseCommand {
 
     }
 
-    void render(List<Entity> data) {
+    void render(List<EntityState> data) {
       if(parent.json()) {
           System.out.println(pretty.string(data));
           return;
       } else {
         System.out.println(Util.table().data(data,
-                    List.of(column("ID").with(e -> e.id()),
+                    List.of(column("ID").with(e -> unicode((e.id()))),
                             column("STATE").maxWidth(20).with(e -> e.state()))));
       }
     };
     
-    @Command(name = "get")
+        Map<String, String> domainIcons = Map.ofEntries(
+            Map.entry("light", "\uD83D\uDCA1 "), // 💡
+            Map.entry("switch", "\uD83D\uDD0C "), // 🔌
+            Map.entry("sensor", "\uD83D\uDCE6 "), // 📦
+            Map.entry("climate", "\uD83C\uDF21️ "), // 🌡️
+            Map.entry("media_player", "\uD83C\uDFB5 "), // 🎵
+            Map.entry("camera", "\uD83D\uDCFD "), // 🎥
+            Map.entry("lock", "\uD83D\uDD12 "), // 🔒
+            Map.entry("alarm_control_panel", "\u23F0 "), // ⏰
+            Map.entry("binary_sensor", "\uD83D\uDD18 "), // 🔘
+            Map.entry("cover", "\uD83D\uDEAA "), // 🚪
+            Map.entry("fan", "\uD83D\uDCA8 "), // 💨
+            Map.entry("number", "\u2116"), // №
+            Map.entry("automation", "\u2699️ "), // ⚙️
+            Map.entry("scene", "\uD83C\uDFAC "), // 🎬
+            Map.entry("script", "\uD83D\uDCDC "), // 📜
+            Map.entry("vacuum", "\uD83E\uDDF9 "), // 🧹
+            Map.entry("weather", "\u2600️ "), // ☀️
+            Map.entry("person", "\uD83D\uDC64 "), // 👤
+            Map.entry("group", "\uD83D\uDC65 "), // 👥
+            Map.entry("input_boolean", "\u2705 "), // ✅
+            Map.entry("input_select", "\uD83D\uDD3D "), // 🔽
+            Map.entry("timer", "\u23F2️ "), // ⏲️
+            Map.entry("remote", "\uD83D\uDCF1 "), // 📱
+            Map.entry("device_tracker", "\uD83D\uDCCC ") // 📌
+        );
+
+    private String unicode(String entity) {
+      if(entity==null || !entity.contains(".")) return entity;
+
+      String domain = entity.substring(0, entity.indexOf("."));
+
+      return domainIcons.getOrDefault(domain, "") + entity;
+   }
+
+   @Command(name = "get")
     public void list(String entityId) {
        var s = ha.getState(entityId);
        render(List.of(s));
@@ -73,7 +104,7 @@ public class StateCommand extends BaseCommand {
        var s = ha.getState(entityId);
       
        try {
-           Path tempFile = java.nio.file.Files.createTempFile("tempEntity", ".json");
+           Path tempFile = java.nio.file.Files.createTempFile("tempEntityState", ".json");
            FileWriter writer = new FileWriter(tempFile.toFile());
            writer.write(pretty.string(s));
            writer.close();

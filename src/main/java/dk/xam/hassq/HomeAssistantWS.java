@@ -9,6 +9,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.function.Consumer;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dk.xam.hassq.model.Area;
+import dk.xam.hassq.model.Entity;
 import io.quarkus.logging.Log;
 import jakarta.websocket.ClientEndpoint;
 import jakarta.websocket.ContainerProvider;
@@ -30,17 +32,16 @@ import jakarta.websocket.Session;
 @ClientEndpoint
 public class HomeAssistantWS {
 
-public static final String WS_TYPE_DEVICE_REGISTRY_LIST = "config/device_registry/list";
-public static final String WS_TYPE_AREA_REGISTRY_LIST = "config/area_registry/list";
-public static final String WS_TYPE_AREA_REGISTRY_CREATE = "config/area_registry/create";
-public static final String WS_TYPE_AREA_REGISTRY_DELETE = "config/area_registry/delete";
-public static final String WS_TYPE_AREA_REGISTRY_UPDATE = "config/area_registry/update";
-public static final String WS_TYPE_DEVICE_REGISTRY_UPDATE = "config/device_registry/update";
-public static final String WS_TYPE_ENTITY_REGISTRY_LIST = "config/entity_registry/list";
-public static final String WS_TYPE_ENTITY_REGISTRY_GET = "config/entity_registry/get";
-public static final String WS_TYPE_ENTITY_REGISTRY_UPDATE = "config/entity_registry/update";
-public static final String WS_TYPE_ENTITY_REGISTRY_REGISTRY = "config/entity_registry/remove";
-
+    public static final String WS_TYPE_DEVICE_REGISTRY_LIST = "config/device_registry/list";
+    public static final String WS_TYPE_AREA_REGISTRY_LIST = "config/area_registry/list";
+    public static final String WS_TYPE_AREA_REGISTRY_CREATE = "config/area_registry/create";
+    public static final String WS_TYPE_AREA_REGISTRY_DELETE = "config/area_registry/delete";
+    public static final String WS_TYPE_AREA_REGISTRY_UPDATE = "config/area_registry/update";
+    public static final String WS_TYPE_DEVICE_REGISTRY_UPDATE = "config/device_registry/update";
+    public static final String WS_TYPE_ENTITY_REGISTRY_LIST = "config/entity_registry/list";
+    public static final String WS_TYPE_ENTITY_REGISTRY_GET = "config/entity_registry/get";
+    public static final String WS_TYPE_ENTITY_REGISTRY_UPDATE = "config/entity_registry/update";
+    public static final String WS_TYPE_ENTITY_REGISTRY_REGISTRY = "config/entity_registry/remove";
 
     private CompletableFuture<String> messageFuture;
 
@@ -52,6 +53,7 @@ public static final String WS_TYPE_ENTITY_REGISTRY_REGISTRY = "config/entity_reg
     String token;
 
     String server;
+    private Consumer<String> callback;
 
     enum State {
         INIT, AUTHENTICATING, READY, DONE
@@ -94,9 +96,11 @@ public static final String WS_TYPE_ENTITY_REGISTRY_REGISTRY = "config/entity_reg
                     if (result != null) {
                         state = HomeAssistantWS.State.DONE;
                         return (T) result;
-                    } /*else {
-                        throw new IllegalStateException("Unexpected message: " + last);
-                    }*/
+                    } /*
+                       * else {
+                       * throw new IllegalStateException("Unexpected message: " + last);
+                       * }
+                       */
                 }
             }
         } catch (DeploymentException | IOException | InterruptedException | ExecutionException
@@ -159,10 +163,19 @@ public static final String WS_TYPE_ENTITY_REGISTRY_REGISTRY = "config/entity_reg
                     state = State.DONE;
                     Log.debug("converting " + map.get("result") + " to " + resultType);
                     return mapper.treeToValue(map.get("result"), resultType);
+                } else if("event".equals(type) && callback != null) {
+                    callback.accept(msg);
+                } else if ("pong".equals(type)) {
+                    session.getAsyncRemote().sendText("{\"id\": " + map.get("id") + "\"type\": \"pong\"}");
                 } else {
                     throw new IllegalStateException("Unexpected message: " + msg);
                 }
             case DONE:
+                if("event".equals(type) && callback != null) {
+                    callback.accept(msg);
+                } else if ("pong".equals(type)) {
+                    session.getAsyncRemote().sendText("{\"id\": " + map.get("id") + "\"type\": \"pong\"}");
+                }
                 return null; // todo: should we throw an exception here?
             default:
                 break;
@@ -172,6 +185,7 @@ public static final String WS_TYPE_ENTITY_REGISTRY_REGISTRY = "config/entity_reg
 
     @OnMessage
     void message(String msg, Session session) throws IllegalArgumentException, IOException {
+        Log.debug("Received message: " + msg);
         messageFuture.complete(msg);
     }
 
@@ -185,14 +199,33 @@ public static final String WS_TYPE_ENTITY_REGISTRY_REGISTRY = "config/entity_reg
     }
 
     public Area createArea(String name) {
-        return query(Map.of("type", WS_TYPE_AREA_REGISTRY_CREATE, "name", name), mapper.getTypeFactory().constructType(Area.class));
+        return query(Map.of("type", WS_TYPE_AREA_REGISTRY_CREATE, "name", name),
+                mapper.getTypeFactory().constructType(Area.class));
     }
 
     public Area deleteArea(String id) {
-        return query(Map.of("type", WS_TYPE_AREA_REGISTRY_DELETE, "area_id", id), mapper.getTypeFactory().constructType(Area.class));
+        return query(Map.of("type", WS_TYPE_AREA_REGISTRY_DELETE, "area_id", id),
+                mapper.getTypeFactory().constructType(Area.class));
     }
 
     public Area renameArea(String id, String newName) {
-        return query(Map.of("type", WS_TYPE_AREA_REGISTRY_UPDATE, "area_id", id, "name", newName), mapper.getTypeFactory().constructType(Area.class));
+        return query(Map.of("type", WS_TYPE_AREA_REGISTRY_UPDATE, "area_id", id, "name", newName),
+                mapper.getTypeFactory().constructType(Area.class));
     }
+
+    public String watch(String event, java.util.function.Consumer<String> callback) {
+        this.callback = callback;
+        if(event!=null) {
+            return query(Map.of("type", "subscribe_events", "event_type", event), mapper.getTypeFactory().constructType(String.class));
+        } else {
+            return query(Map.of("type", "subscribe_events"), mapper.getTypeFactory().constructType(String.class));
+        }
+    }
+
+    public List<Entity> getEntities() {
+        return query(Map.of("type", "config/entity_registry/list"),
+                mapper.getTypeFactory().constructCollectionType(List.class, Entity.class));
+    }
+
+
 }

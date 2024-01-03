@@ -48,5 +48,8 @@ public class GlobalOptions {
     // but if we wanted to we could do something like this
     // ((MyApp) mixee.root().userObject()).loggingMixin.verbosity = verbosity;
     }
+
+    @Option(names = {"--debug"}, description = {"Debug output"})
+    boolean debug;
     
 }
