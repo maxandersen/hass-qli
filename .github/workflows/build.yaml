@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: matrix.os == 'ubuntu-latest'
         with:
-            name: hass-qli-${{ matrix.os }}.jar
+            name: hass-qli.jar
             path: target/hass-qli-*-SNAPSHOT.jar
 
       - name: Upload binary
