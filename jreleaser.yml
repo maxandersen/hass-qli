@@ -1,7 +1,7 @@
 # Generated with JReleaser 1.9.0 at 2023-12-28T12:12:48.678977+01:00
 project:
   name: hass-qli
-  version: 1.0.0-SNAPSHOT
+  version: 
   description: Home Assistant CLI
   longDescription: Command line interface for Home Assistant
   authors:
