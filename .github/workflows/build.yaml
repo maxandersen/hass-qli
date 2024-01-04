@@ -72,7 +72,7 @@ jobs:
   release:
       name: Release
       if: "contains(github.event.head_commit.message, '[release]') && github.event.ref=='refs/heads/main'"
-      needs: [ build, precheck ]
+      needs: [ precheck, build ]
       runs-on: ubuntu-latest
       steps:
         - name: Checkout repository
@@ -81,7 +81,7 @@ jobs:
             fetch-depth: 0
   
         - name: Download all build artifacts
-          uses: actions/download-artifact@v2
+          uses: actions/download-artifact@v4
   
         - name: Run JReleaser
           uses: jreleaser/release-action@v2
