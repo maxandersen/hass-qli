@@ -36,9 +36,9 @@ distributions:
       - path: "hass-qli-macos-latest/hass-qli-{{projectVersion}}"
         transform: "hass-qli-{{projectEffectiveVersion}}-macos-x86_64"
         platform: osx-x86_64
-      - path: "hass-qli-macos-latest-large/hass-qli-{{projectVersion}}"
-        transform: "hass-qli-{{projectEffectiveVersion}}-macos-arm64"
-        platform: osx-aarch_64
+    #  - path: "hass-qli-macos-latest-large/hass-qli-{{projectVersion}}"
+    #    transform: "hass-qli-{{projectEffectiveVersion}}-macos-arm64"
+    #    platform: osx-aarch_64
 
   wave-cli-jar:
     type: SINGLE_JAR
