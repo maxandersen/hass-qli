@@ -1,0 +1,48 @@
+# Generated with JReleaser 1.9.0 at 2023-12-28T12:12:48.678977+01:00
+project:
+  name: hass-qli
+  version: 1.0.0-SNAPSHOT
+  description: Home Assistant CLI
+  longDescription: Command line interface for Home Assistant
+  authors:
+    - Max Rydahl Andersen
+  license: Apache-2.0
+  links:
+    homepage: https://github.com/maxandersen/hass-qli
+  java:
+    groupId: dk.xam.hass-qli
+    version: "17"
+  inceptionYear: "2023"
+
+release:
+  github:
+   # overwrite: true
+    draft: true
+    
+    owner: maxandersen
+
+distributions:
+  wave-cli:
+    type: FLAT_BINARY
+    executable:
+      name: wave
+    artifacts:
+      - path: "target/hass-qli-{{projectVersion}}"
+        transform: "hass-qli-{{projectEffectiveVersion}}-linux-x86_64"
+        platform: linux-x86_64
+      - path: "target/hass-qli-{{projectVersion}}"
+        transform: "hass-qli-{{projectEffectiveVersion}}-windows-x86_64.exe"
+        platform: windows-x86_64
+      - path: "target/hass-qli-{{projectVersion}}"
+        transform: "hass-qli-{{projectEffectiveVersion}}-macos-x86_64"
+        platform: osx-x86_64
+      - path: "target/hass-qli-{{projectVersion}}"
+        transform: "hass-qli-{{projectEffectiveVersion}}-macos-arm64"
+        platform: osx-aarch_64
+
+  wave-cli-jar:
+    type: SINGLE_JAR
+    artifacts:
+      - path: "hass-cli/hass-cli-.jar"
+        transform: "wave-{{projectEffectiveVersion}}.jar"
+
