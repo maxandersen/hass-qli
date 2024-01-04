@@ -18,7 +18,7 @@ release:
   github:
    # overwrite: true
     draft: true
-    
+
     owner: maxandersen
 
 distributions:
@@ -27,22 +27,22 @@ distributions:
     executable:
       name: wave
     artifacts:
-      - path: "target/hass-qli-{{projectVersion}}"
+      - path: "hass-qli-ubuntu-latest-{{projectVersion}}"
         transform: "hass-qli-{{projectEffectiveVersion}}-linux-x86_64"
         platform: linux-x86_64
-      - path: "target/hass-qli-{{projectVersion}}"
-        transform: "hass-qli-{{projectEffectiveVersion}}-windows-x86_64.exe"
-        platform: windows-x86_64
-      - path: "target/hass-qli-{{projectVersion}}"
-        transform: "hass-qli-{{projectEffectiveVersion}}-macos-x86_64"
-        platform: osx-x86_64
-      - path: "target/hass-qli-{{projectVersion}}"
-        transform: "hass-qli-{{projectEffectiveVersion}}-macos-arm64"
-        platform: osx-aarch_64
+     # - path: "hass-qli-windows-latest{{projectVersion}}"
+     #   transform: "hass-qli-{{projectEffectiveVersion}}-windows-x86_64.exe"
+     #   platform: windows-x86_64
+     # - path: "hass-qli-macos-latest/hass-qli-{{projectVersion}}"
+     #   transform: "hass-qli-{{projectEffectiveVersion}}-macos-x86_64"
+     #   platform: osx-x86_64
+     # - path: "hass-qli-macos-latest-large/hass-qli-{{projectVersion}}"
+     #   transform: "hass-qli-{{projectEffectiveVersion}}-macos-arm64"
+     #   platform: osx-aarch_64
 
   wave-cli-jar:
     type: SINGLE_JAR
     artifacts:
-      - path: "hass-cli/hass-cli-.jar"
-        transform: "wave-{{projectEffectiveVersion}}.jar"
+      - path: "hass-qli.jar/hass-cli-{{projectVersion}}.jar"
+        transform: "hass-qli-{{projectEffectiveVersion}}.jar"
 
