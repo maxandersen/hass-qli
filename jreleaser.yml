@@ -27,10 +27,10 @@ distributions:
     executable:
       name: wave
     artifacts:
-      - path: "hass-qli-ubuntu-latest-{{projectVersion}}"
+      - path: "hass-qli-ubuntu-latest/hass-qli-{{projectVersion}}"
         transform: "hass-qli-{{projectEffectiveVersion}}-linux-x86_64"
         platform: linux-x86_64
-     # - path: "hass-qli-windows-latest{{projectVersion}}"
+     # - path: "hass-qli-windows-latest/hass-qli-{{projectVersion}}"
      #   transform: "hass-qli-{{projectEffectiveVersion}}-windows-x86_64.exe"
      #   platform: windows-x86_64
      # - path: "hass-qli-macos-latest/hass-qli-{{projectVersion}}"
