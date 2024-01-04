@@ -40,3 +40,45 @@ jobs:
         with:
           name: ${{ matrix.os == 'windows-latest' && format('hass-qli-{0}.exe', matrix.os) || format('hass-qli-{0}', matrix.os) }}
           path: target/${{ matrix.os == 'windows-latest' && 'hass-qli-*-SNAPSHOT.exe' || 'hass-qli-*-SNAPSHOT' }}
+
+  release:
+      name: Release
+      if: "contains(github.event.head_commit.message, '[release]') && github.event.ref=='refs/heads/main'"
+      needs: [ build ]
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+  
+        - name: Download all build artifacts
+          uses: actions/download-artifact@v2
+  
+        - name: Setup Java for JReleaser
+          uses: actions/setup-java@v3
+          with:
+            java-version: '21'
+            distribution: 'adopt'
+  
+        - name: Version
+          id: version
+          run: |
+            VERSION=$(cat ./VERSION)
+            echo "VERSION=$VERSION"
+            echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+  
+        - name: Run JReleaser
+          uses: jreleaser/release-action@v2
+          env:
+            JRELEASER_GITHUB_TOKEN: ${{ secrets.JRELEASER_GITHUB_TOKEN }}
+            JRELEASER_PROJECT_VERSION: ${{ steps.version.outputs.VERSION }}
+  
+        - name: JReleaser release output
+          if: always()
+          uses: actions/upload-artifact@v3
+          with:
+                  name: jreleaser-release
+                  path: |
+                    out/jreleaser/trace.log
+                    out/jreleaser/output.properties
