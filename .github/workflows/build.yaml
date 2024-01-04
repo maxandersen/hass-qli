@@ -61,13 +61,13 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         with:
             name: hass-qli.jar
-            path: target/hass-qli-*-SNAPSHOT.jar
+            path: target/hass-qli-*.jar
 
       - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os == 'windows-latest' && format('hass-qli-{0}.exe', matrix.os) || format('hass-qli-{0}', matrix.os) }}
-          path: target/${{ matrix.os == 'windows-latest' && 'hass-qli-*-SNAPSHOT.exe' || 'hass-qli-*-SNAPSHOT' }}
+          path: target/${{ matrix.os == 'windows-latest' && 'hass-qli-*.exe' || 'hass-qli-*' }}
 
   release:
       name: Release
