@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>dk.xam.hassq</groupId>
   <artifactId>hass-qli</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
   <name>hass-cli</name>
   <description>hass-cli -- CLI for Home Assistant</description>
   <inceptionYear>2023</inceptionYear>
