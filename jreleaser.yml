@@ -43,6 +43,6 @@ distributions:
   wave-cli-jar:
     type: SINGLE_JAR
     artifacts:
-      - path: "hass-qli.jar/hass-cli-{{projectVersion}}.jar"
+      - path: "hass-qli.jar/hass-qli-{{projectVersion}}.jar"
         transform: "hass-qli-{{projectEffectiveVersion}}.jar"
 
