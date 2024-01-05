@@ -14,7 +14,8 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.ParseResult;
 @QuarkusMain
 @Command(name = "hassq", mixinStandardHelpOptions = true, 
-          subcommands = { StateCommand.class, AreaCommand.class, EntityCommand.class, EventCommand.class, ConfigCommand.class})
+          subcommands = { StateCommand.class, AreaCommand.class, EntityCommand.class, EventCommand.class, ConfigCommand.class},
+          versionProvider = VersionProvider.class)
 public class hassq extends BaseCommand implements Runnable, QuarkusApplication {
 
   @picocli.CommandLine.Option(names = {"--json"}, description = {"Output as json"}, scope = picocli.CommandLine.ScopeType.INHERIT)
