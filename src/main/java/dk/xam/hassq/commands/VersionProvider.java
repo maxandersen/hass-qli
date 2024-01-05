@@ -1,26 +1,24 @@
 package dk.xam.hassq.commands;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-
-import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import jakarta.enterprise.inject.Instance;
-import jakarta.enterprise.inject.spi.CDI;
+import jakarta.inject.Singleton;
 import picocli.CommandLine.IVersionProvider;
 
+/**
+ * This class provides the version of the application.
+ * It implements the IVersionProvider interface from the picocli library.
+ * The @Singleton annotation enables us to inject this into picocli globally inside Quarkus.
+ * The version is injected from the "quarkus.application.version" configuration property.
+ **/
+@Singleton
 public class VersionProvider implements IVersionProvider {
+
+    @ConfigProperty(name = "quarkus.application.version")
+    String version;
 
     @Override
     public String[] getVersion() throws Exception {
-
-        Instance<Config> configInstance = CDI.current().select(Config.class);
-        String version = configInstance.get().getValue("quarkus.application.version", String.class);
-        
         return new String[] { version };
     }
-
-    
 }

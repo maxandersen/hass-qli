@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import dk.xam.hassq.CLIConfigSource;
 import dk.xam.hassq.HomeAssistantWS;
+import io.quarkus.picocli.runtime.PicocliCommandLineFactory;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
