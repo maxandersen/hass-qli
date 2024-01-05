@@ -51,17 +51,24 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           #native-image-job-reports: 'true'
 
-      - name: Build 
+      - name: Build Standalone jar 
+        if: matrix.os == 'ubuntu-latest'
         run: |
-          ## skipping until we find reliable way to mock websocket/rest homeassistant api
-          mvn -Pnative clean package -DskipTests
-      
-      - name: Upload jar
+            ## skipping testing until we find reliable way to mock websocket/rest homeassistant api
+            mvn clean package -DskipTests    
+       
+      - name: Upload Standalone jar
         uses: actions/upload-artifact@v4
         if: matrix.os == 'ubuntu-latest'
         with:
             name: hass-qli.jar
             path: target/hass-qli-*.jar
+
+      - name: Build Native 
+        run: |
+          ## skipping until we find reliable way to mock websocket/rest homeassistant api
+          mvn -Pnative package -DskipTests
+     
 
       - name: Upload binary
         uses: actions/upload-artifact@v4
