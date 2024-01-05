@@ -6,15 +6,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import dk.xam.hassq.HomeAssistantWS;
-import dk.xam.hassq.PPrinter;
-import dk.xam.hassq.Util;
-import dk.xam.hassq.model.Entity;
 import io.quarkus.logging.Log;
+
 import jakarta.inject.Inject;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
+
+import dk.xam.hassq.HomeAssistantWS;
+import dk.xam.hassq.PPrinter;
+import dk.xam.hassq.Util;
+import dk.xam.hassq.model.Entity;
 
 @Command(name = "entity")
 public class EntityCommand extends BaseCommand {
@@ -30,7 +32,6 @@ public class EntityCommand extends BaseCommand {
        var states = ha.getEntities();
 
        Pattern p = entityFilter.isPresent() ? Pattern.compile(entityFilter.get()) : Pattern.compile(".*");
-       Pattern sf = stateFilter.isPresent() ? Pattern.compile(stateFilter.get()) : Pattern.compile(".*");
 
        Log.info("States matching " + p.pattern());
 

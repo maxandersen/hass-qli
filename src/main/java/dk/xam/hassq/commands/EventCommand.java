@@ -6,15 +6,16 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
+import io.quarkus.logging.Log;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.inject.Inject;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Parameters;
 
 import dk.xam.hassq.HomeAssistantWS;
 import dk.xam.hassq.Util;
 import dk.xam.hassq.model.Area;
-import io.quarkus.logging.Log;
-import jakarta.inject.Inject;
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Parameters;
 
 @Command(name = "event")
 public class EventCommand extends BaseCommand {

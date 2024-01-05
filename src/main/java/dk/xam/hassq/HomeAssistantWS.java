@@ -11,21 +11,21 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
+import io.quarkus.logging.Log;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import dk.xam.hassq.model.Area;
-import dk.xam.hassq.model.Entity;
-import io.quarkus.logging.Log;
 import jakarta.websocket.ClientEndpoint;
 import jakarta.websocket.ContainerProvider;
 import jakarta.websocket.DeploymentException;
 import jakarta.websocket.OnMessage;
 import jakarta.websocket.OnOpen;
 import jakarta.websocket.Session;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import dk.xam.hassq.model.Area;
+import dk.xam.hassq.model.Entity;
 
 // super dumb websocket client to HA that just does the bare minimum to
 // authenticate and query values.

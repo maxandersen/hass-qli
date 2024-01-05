@@ -11,14 +11,14 @@ import java.util.concurrent.TimeoutException;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import dk.xam.hassq.HomeAssistantWS;
-import dk.xam.hassq.Util;
-import dk.xam.hassq.model.Area;
 import jakarta.inject.Inject;
 import jakarta.websocket.DeploymentException;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
+
+import dk.xam.hassq.HomeAssistantWS;
+import dk.xam.hassq.Util;
+import dk.xam.hassq.model.Area;
 
 @Command(name = "area")
 public class AreaCommand extends BaseCommand {

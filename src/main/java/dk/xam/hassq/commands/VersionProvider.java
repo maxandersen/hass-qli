@@ -1,9 +1,9 @@
 package dk.xam.hassq.commands;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
 import io.quarkus.arc.Unremovable;
+
 import jakarta.inject.Singleton;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import picocli.CommandLine.IVersionProvider;
 
 /**

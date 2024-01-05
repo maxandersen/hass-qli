@@ -1,7 +1,6 @@
 package dk.xam.hassq.commands;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-
 import picocli.CommandLine.Mixin;
 import picocli.CommandLine.ParentCommand;
 

@@ -2,17 +2,18 @@ package dk.xam.hassq.commands;
 
 import java.io.PrintWriter;
 
-import dk.xam.hassq.CLIConfigSource;
-import dk.xam.hassq.HomeAssistantWS;
-import io.quarkus.picocli.runtime.PicocliCommandLineFactory;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
+
 import jakarta.enterprise.inject.spi.DeploymentException;
 import jakarta.inject.Inject;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.ParseResult;
+
+import dk.xam.hassq.CLIConfigSource;
+import dk.xam.hassq.HomeAssistantWS;
 @QuarkusMain
 @Command(name = "hassq", mixinStandardHelpOptions = true, 
           subcommands = { StateCommand.class, AreaCommand.class, EntityCommand.class, EventCommand.class, ConfigCommand.class},

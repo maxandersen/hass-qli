@@ -8,17 +8,15 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
+import jakarta.inject.Inject;
+import jakarta.websocket.DeploymentException;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import picocli.CommandLine.Command;
 
 import dk.xam.hassq.HomeAssistant;
 import dk.xam.hassq.PPrinter;
 import dk.xam.hassq.Util;
 import dk.xam.hassq.model.Config;
-import jakarta.inject.Inject;
-import jakarta.websocket.DeploymentException;
-import picocli.CommandLine.Command;
 
 @Command(name = "config")
 public class ConfigCommand extends BaseCommand {

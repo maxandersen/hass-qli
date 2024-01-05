@@ -44,4 +44,3 @@ public record EntityState(
         @JsonProperty("user_id") String userId) {
     }
 }
-

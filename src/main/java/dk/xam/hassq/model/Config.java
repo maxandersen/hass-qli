@@ -29,4 +29,3 @@ public record Config(
     @JsonProperty("safe_mode") boolean safeMode) {
 
 }
-

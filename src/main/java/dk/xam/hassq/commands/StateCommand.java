@@ -10,19 +10,19 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import org.eclipse.microprofile.rest.client.inject.RestClient;
+import io.quarkus.logging.Log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.inject.Inject;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
 
 import dk.xam.hassq.HomeAssistant;
 import dk.xam.hassq.PPrinter;
 import dk.xam.hassq.Util;
 import dk.xam.hassq.model.EntityState;
-import io.quarkus.logging.Log;
-import jakarta.inject.Inject;
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
 
 @Command(name = "state")
 public class StateCommand extends BaseCommand {

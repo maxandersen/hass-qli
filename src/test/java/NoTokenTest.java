@@ -1,12 +1,12 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import io.quarkus.test.junit.TestProfile;
 import io.quarkus.test.junit.main.Launch;
 import io.quarkus.test.junit.main.LaunchResult;
 import io.quarkus.test.junit.main.QuarkusMainTest;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
  
 @QuarkusMainTest
 @TestProfile(NoTokenTestProfile.class)

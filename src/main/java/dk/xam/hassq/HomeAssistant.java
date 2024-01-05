@@ -4,16 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.microprofile.rest.client.annotation.ClientHeaderParam;
-import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+import io.quarkus.rest.client.reactive.ClientExceptionMapper;
 
 import com.fasterxml.jackson.databind.JsonNode;
-
-import dk.xam.hassq.model.Config;
-import dk.xam.hassq.model.DomainInfo;
-import dk.xam.hassq.model.EntityState;
-import dk.xam.hassq.model.EventInfo;
-import io.quarkus.rest.client.reactive.ClientExceptionMapper;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -21,6 +14,13 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.rest.client.annotation.ClientHeaderParam;
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+
+import dk.xam.hassq.model.Config;
+import dk.xam.hassq.model.DomainInfo;
+import dk.xam.hassq.model.EntityState;
+import dk.xam.hassq.model.EventInfo;
 
 @Path("/api")
 @ClientHeaderParam(name = "Authorization", value = "Bearer ${hass-token}")
