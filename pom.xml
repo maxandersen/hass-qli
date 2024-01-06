@@ -4,10 +4,10 @@
   <groupId>dk.xam.hassq</groupId>
   <artifactId>hass-qli</artifactId>
   <version>0.0.4-SNAPSHOT</version>
-  <name>hass-cli</name>
-  <description>hass-cli -- CLI for Home Assistant</description>
+  <name>hass-qli</name>
+  <description>hass-qli -- CLI for Home Assistant</description>
   <inceptionYear>2023</inceptionYear>
-  <url>https://github.com/maxandersen/hass-qli</url>
+  <url>https://github.com/maxandersen/home-assistant-qli</url>
   <developers>
     <developer>
       <id>maxandersen</id>

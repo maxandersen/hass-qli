@@ -1,4 +1,4 @@
-= Home Assistant cli in Quarkus (`hass-cli`)
+= Home Assistant cli in Quarkus (`hass-qli`)
 
 This is an early, simple, and straightforward implementation of a command-line interface (CLI) for https://github.com/home-assistant/home-assistant-cli[Home Assistant] using https://quarkus.io[Quarkus]. 
 
