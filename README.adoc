@@ -1,0 +1,117 @@
+= Home Assistant cli in Quarkus (`hass-cli`)
+
+This is an early, simple, and straightforward implementation of a command-line interface (CLI) for https://github.com/home-assistant/home-assistant-cli[Home Assistant] using https://quarkus.io[Quarkus]. 
+
+Do NOT use this for anything serious and do NOT expect it to work nor is the code/structure anywhere near final.
+
+== Requirements
+
+. A Long Lived Access token for your Home Assistant instance. You can get it from the bottom of your profile page in Home Assistant.
++
+image:https://my.home-assistant.io/badges/profile.svg["Open your Home Assistant instance and show your Home Assistant user's profile.", link="https://my.home-assistant.io/redirect/profile/"]
+
+. Download the latest native binary or jar from the https://github.com/maxandersen/home-assistant-qli/releases/tag/early-access[Early Access release]
++
+If you have https://jbang.dev/[jbang] installed you can also install it directly from github:
+±
+[source,shell]
+----
+jbang app install hass-qli-early-access@maxandersen
+----
+
+Now setup your token as an environment variable:
+
+[source,shell]
+----
+export HASS_TOKEN=your-token
+----
+
+and if necessary set the url to your Home Assistant instance:
+
+[source,shell]
+----
+export HASS_URL=http://localhost:8123
+----
+
+By default it will use `http://homeassistant.local:8123` as the url.
+
+== Basic usage examples
+
+List all state
+
+[source,shell]
+----
+hass-qli state list
+ ID                                                             STATE
+ 👤 person.max_rydahl_andersen                                  not_home
+ 💡 light.stars                                                 on
+ 💡 light.kitchentable_group_light                              on
+ 💡 light.hall_group_light                                      off
+ 💡 light.house                                                 on
+ 💡 light.partyroom_entrance                                    off
+...
+----
+
+You can put a filter after the list command to filter the list:
+
+[source,shell]
+----
+hass-qli state list camera
+ ID                                                   STATE
+ 📽 camera.mail_usps_camera                           idle
+ 📽 camera.mail_amazon_delivery_camera                idle
+ 🔘 binary_sensor.camera_motion                       off
+ 📦 sensor.camera_battery                             100
+ 📦 sensor.camera_volume                              11
+ 🔌 switch.camera_siren                               off
+ 📦 sensor.mac_macbook_active_camera                  unknown
+ 🔘 binary_sensor.mac_macbook_camera_in_use           off
+ 📦 sensor.darkbeard_active_camera                    Inactive
+ 📦 sensor.camera_last_activity                       unknown
+ 🔘 binary_sensor.darkbeard_camera_in_use             off
+ 📦 sensor.camera_last_motion                         unknown
+ 📦 sensor.manderse_mac_active_camera                 Inactive
+...
+----
+
+The filter is a regular expression so you can do more advanced targeted filtering.
+The following is example of showing only where the ID starts with `camera`. Note that quotes are needed to avoid the shell to expand the expression:
+
+[source,shell]
+----
+hass-qli state list "^camera"
+ ID                                     STATE
+ 📽 camera.mail_usps_camera             idle
+ 📽 camera.mail_amazon_delivery_camera  idle
+ 📽 camera.carbonshaper_camera          recording
+ 📽 camera.front_door_doorbell_sub_2    idle
+ 📽 camera.camera1_sub                  idle
+ 📽 camera.driveway_2_sub               idle
+ 📽 camera.max_office_sub               idle
+ 📽 camera.camera_5_sub                 idle
+ 📽 camera.side_door                    unavailable
+ 📽 camera.front_door                   unavailable
+ 📽 camera.front_door_doorbell_sub      unavailable
+ 📽 camera.barn_outdoor_sub             idle
+----
+
+There are more commands available, but they are not documented yet. You can see them by running `hass-qli` without any arguments.
+
+== Background
+
+Around 2018/2019 I started to use Home Assistant and I really liked it. I also started to
+move forward the hass-cli python project (https://github.com/home-assistant/home-assistant-cli) to 
+the extent it had several releases and became really useful for me. You can read more about it link:https://www.home-assistant.io/blog/2019/02/04/introducing-home-assistant-cli/[here] and even got on the podcast link:https://www.youtube.com/watch?v=m8AQrlfwfCg[here].
+
+However, I went on a sabbatical and got to work on other things. I also got back to using Java and
+just didn't have the time to work on the hass-cli project. 
+
+Now some years later I'm back to using Home Assistant and hass-cli recently haven't had working releases
+and xmas 2024 I really wanted to have a working cli for Home Assistant. So I decided to start a new Java
+based on using Quarkus.
+
+Thus this is not trying to displace hass-cli but rather be a new alternative. 
+
+Not sure where it will go but at least I have a working cli for my own use now and I have a way to test Quarkus developer experience.
+
+The advantages of using Java is that its dependencies are much easier to manage and does not conflict with other Python dependencies. Meaning that even 5 years from now this code shuold be able to run without any issues - assuming HomeAssistant API is still the same. 
